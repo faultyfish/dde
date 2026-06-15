@@ -44,6 +44,11 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install chromium
 
+      - name: Run DB migrations (idempotent — safe to run every time)
+        env:
+          NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+        run: python db/migrate.py
+
       - name: Run scraper — Indeed
         if: ${{ github.event.inputs.source == 'indeed' || github.event.inputs.source == 'all' || github.event_name == 'schedule' }}
         env:
