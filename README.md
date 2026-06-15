@@ -2,18 +2,6 @@
 
 Automated job scraping system for **DevOps, Cloud, SRE, and MLOps** roles in Ireland (Dublin + Remote).
 
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  GitHub Actions (daily cron)                            │
-│  └── scraper/ (Python + Playwright)                     │
-│       ├── Indeed scraper                                │
-│       └── LinkedIn scraper                             │
-│            └──▶ Neon Postgres (cloud DB)               │
-│                    └──▶ api/ (FastAPI on Render)        │
-│                              └──▶ ui/ (GitHub Pages)   │
-└─────────────────────────────────────────────────────────┘
 ```
 
 ## Stack
