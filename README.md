@@ -2,20 +2,6 @@
 
 Automated job scraping system for **DevOps, Cloud, SRE, and MLOps** roles in Ireland (Dublin + Remote).
 
-```
-
-## Stack
-
-| Layer      | Tech                          |
-|------------|-------------------------------|
-| Scraping   | Python 3.11, Playwright       |
-| Database   | Neon Postgres (serverless)    |
-| API        | FastAPI + psycopg2            |
-| Frontend   | Vanilla HTML/CSS/JS           |
-| Hosting UI | GitHub Pages                  |
-| Hosting API| Render (free tier)            |
-| Automation | GitHub Actions (cron)         |
-
 ## Setup
 
 ### 1. Clone & install deps
