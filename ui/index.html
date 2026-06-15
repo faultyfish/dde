@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevOps & Cloud Jobs — Ireland</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-badge">⚡ IRELAND · LIVE DATA</div>
+      <h1>DevOps &amp; Cloud<br><span class="accent">Job Board</span></h1>
+      <p class="subtitle">Real jobs scraped daily from Indeed &amp; LinkedIn.<br>DevOps · Cloud · SRE · MLOps roles across Dublin &amp; Remote.</p>
+      <div class="stat-row" id="stat-row">
+        <div class="stat-pill"><span id="stat-total">—</span><small>Active Roles</small></div>
+        <div class="stat-pill"><span id="stat-remote">—</span><small>Remote</small></div>
+        <div class="stat-pill"><span id="stat-visa">—</span><small>Visa Sponsored</small></div>
+        <div class="stat-pill"><span id="stat-scraped">—</span><small>Last Scraped</small></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── FILTERS ── -->
+  <section class="filters-section">
+    <div class="container">
+      <input type="text" id="search" placeholder="🔍  Search title, company, keyword…" autocomplete="off" />
+
+      <div class="filter-group">
+        <label>ROLE TYPE</label>
+        <div class="pills" id="f-category">
+          <button class="pill active" data-val="">All</button>
+          <button class="pill" data-val="DevOps">DevOps</button>
+          <button class="pill" data-val="Cloud">Cloud</button>
+          <button class="pill" data-val="SRE">SRE</button>
+          <button class="pill" data-val="MLOps">MLOps</button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>LEVEL</label>
+          <div class="pills" id="f-level">
+            <button class="pill active" data-val="">All</button>
+            <button class="pill" data-val="Graduate">Graduate</button>
+            <button class="pill" data-val="Junior">Junior</button>
+            <button class="pill" data-val="Mid">Mid</button>
+            <button class="pill" data-val="Senior">Senior</button>
+            <button class="pill" data-val="Lead">Lead</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>WORK MODE</label>
+          <div class="pills" id="f-remote">
+            <button class="pill active" data-val="">All</button>
+            <button class="pill" data-val="Remote">Remote</button>
+            <button class="pill" data-val="Hybrid">Hybrid</button>
+            <button class="pill" data-val="On-site">On-site</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>CONTRACT</label>
+          <div class="pills" id="f-type">
+            <button class="pill active" data-val="">All</button>
+            <button class="pill" data-val="Full-time">Full-time</button>
+            <button class="pill" data-val="Contract">Contract</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>SOURCE</label>
+          <div class="pills" id="f-source">
+            <button class="pill active" data-val="">All</button>
+            <button class="pill" data-val="indeed">Indeed</button>
+            <button class="pill" data-val="linkedin">LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-footer">
+        <label class="toggle-label">
+          <div class="toggle" id="visa-toggle">
+            <div class="toggle-knob"></div>
+          </div>
+          <span id="visa-label">Visa Sponsorship Only</span>
+        </label>
+        <button class="reset-btn" id="reset-btn">✕ Reset All</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESULTS ── -->
+  <main class="container">
+    <div class="results-meta" id="results-meta">Loading…</div>
+    <div class="jobs-grid" id="jobs-grid"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <!-- ── JOB MODAL ── -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>DevOps &amp; Cloud Job Board · Ireland 2026 · Scraped daily from Indeed &amp; LinkedIn</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
