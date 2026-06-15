@@ -16,7 +16,7 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repo
@@ -29,22 +29,10 @@ jobs:
           cache: "pip"
           cache-dependency-path: scraper/requirements.txt
 
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: pip install -r scraper/requirements.txt
 
-      - name: Install Playwright system dependencies (Ubuntu 24.04 fix)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 \
-            libcups2 libdrm2 libxkbcommon0 libxcomposite1 \
-            libxdamage1 libxfixes3 libxrandr2 libgbm1 \
-            libpango-1.0-0 libcairo2 libasound2t64
-
-      - name: Install Playwright browsers
-        run: playwright install chromium
-
-      - name: Run DB migrations (idempotent — safe to run every time)
+      - name: Run DB migrations (idempotent)
         env:
           NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
         run: python db/migrate.py
@@ -52,25 +40,19 @@ jobs:
       - name: Run scraper — Indeed
         if: ${{ github.event.inputs.source == 'indeed' || github.event.inputs.source == 'all' || github.event_name == 'schedule' }}
         env:
-          NEON_DATABASE_URL:  ${{ secrets.NEON_DATABASE_URL }}
-          LINKEDIN_EMAIL:     ${{ secrets.LINKEDIN_EMAIL }}
-          LINKEDIN_PASSWORD:  ${{ secrets.LINKEDIN_PASSWORD }}
-          SEARCH_KEYWORDS:    "DevOps Engineer,Cloud Engineer,SRE,Platform Engineer,MLOps Engineer"
-          SEARCH_LOCATION:    "Dublin, Ireland"
-          MAX_PAGES_PER_SOURCE: "5"
-          SCRAPE_DELAY:       "3"
+          NEON_DATABASE_URL:       ${{ secrets.NEON_DATABASE_URL }}
+          SEARCH_KEYWORDS:         "DevOps Engineer,Cloud Engineer,SRE,Platform Engineer,MLOps Engineer"
+          SEARCH_LOCATION:         "Dublin, Ireland"
+          MAX_PAGES_PER_SOURCE:    "5"
         run: python -m scraper.run --source indeed
 
       - name: Run scraper — LinkedIn
         if: ${{ github.event.inputs.source == 'linkedin' || github.event.inputs.source == 'all' || github.event_name == 'schedule' }}
         env:
-          NEON_DATABASE_URL:  ${{ secrets.NEON_DATABASE_URL }}
-          LINKEDIN_EMAIL:     ${{ secrets.LINKEDIN_EMAIL }}
-          LINKEDIN_PASSWORD:  ${{ secrets.LINKEDIN_PASSWORD }}
-          SEARCH_KEYWORDS:    "DevOps Engineer,Cloud Engineer,SRE,Platform Engineer,MLOps Engineer"
-          SEARCH_LOCATION:    "Dublin, Ireland"
-          MAX_PAGES_PER_SOURCE: "5"
-          SCRAPE_DELAY:       "3"
+          NEON_DATABASE_URL:       ${{ secrets.NEON_DATABASE_URL }}
+          SEARCH_KEYWORDS:         "DevOps Engineer,Cloud Engineer,SRE,Platform Engineer,MLOps Engineer"
+          SEARCH_LOCATION:         "Dublin, Ireland"
+          MAX_PAGES_PER_SOURCE:    "5"
         run: python -m scraper.run --source linkedin
 
       - name: Upload scrape logs
